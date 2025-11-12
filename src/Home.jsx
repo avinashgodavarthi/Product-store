@@ -83,9 +83,28 @@ function Home() {
 
   const orderItem = { ...item, payment: selectedPayment };
   setOrders([...orders, orderItem]);
-  deleteCart(item, false); // 👈 skip the "removed" toast
+  deleteCart(item, false); 
   toast.success(`✅ Order placed using ${selectedPayment}!`);
 }
+
+var array = [
+  "all",
+   "men's clothing",
+    "jewelery",
+    "electronics",
+    "women's clothing",
+]
+
+
+  function filterCategory(myProduct){
+    if(myProduct === 'all'){
+      setData(alldata)
+    } else{
+    var filteredData = alldata.filter(item=>item.category === myProduct)
+    setData(filteredData)
+    }
+  }
+
 
 
   return (
@@ -109,6 +128,20 @@ function Home() {
       </div>
 
       {/* Product List */}
+      {/* Category Navbar */}
+        <div className="category-navbar">
+          {array.map((item) => (
+            <button
+              key={item}
+              className="category-btn"
+              onClick={() => filterCategory(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+
+
       <div className="product-grid">
         {data.map((item) => (
           <div key={item.id} className="product-card">
@@ -251,4 +284,7 @@ function Home() {
 }
 
 export default Home;
+
+
+
 
